@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1 class="text-center mt-3 mb-3">Bonjour {{ app.user.prenom }} ! </h1>
+    
+    <p class="col text-center">Adresse mail : {{ app.user.email }}</p>
+    <p class="col text-center">Prenom : {{ app.user.prenom }}</p>
+    <p class="col text-center">Nom : {{ app.user.nom }}</p>
+    <p class="col text-center">Adresse : {{ app.user.adresse }}</p>
+    <p class="col text-center">Code postal : {{ app.user.codePostale }}</p>
+    <p class="col text-center">Ville : {{ app.user.ville }}</p>
+    <p class="col text-center">Telephone : {{ app.user.telephone }}</p>
+    <p class="col text-center"><img src="{{ asset('images/' ~ app.user.avatar) }}" alt="" style="width:100px"></p>
+
+{# Pour afficher l'input pour changer d'image de profil #}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+    
+</div>
+
+
+{% endblock %}
