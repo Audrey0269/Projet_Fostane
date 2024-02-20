@@ -17,7 +17,7 @@
 
                     {% if app.user %}
 
-                      <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
 
@@ -42,14 +42,16 @@
                             <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_produit_index') }}">Produit</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_commande_index') }}">Commande</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_tva_index') }}">TVA</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_carousel_index') }}">Carousel</a>
-                        </li>#}
+                        </li>
+                        #}
+
+                        <li class="nav-item">
+                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_commande_index') }}">Commande</a>
+                        </li>
 
                         {% endif %}
                        

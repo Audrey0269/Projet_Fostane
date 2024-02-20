@@ -13,7 +13,7 @@ class DetailCommande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'detailCommandes')] //
     #[ORM\JoinColumn(nullable: false)]
     private ?Commande $commande = null;
 
@@ -51,7 +51,7 @@ class DetailCommande
         return $this->commande;
     }
 
-    public function setCommande(?Commande $commande): static
+    public function setCommande(?Commande $commande): self
     {
         $this->commande = $commande;
 
@@ -63,7 +63,7 @@ class DetailCommande
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -75,7 +75,7 @@ class DetailCommande
         return $this->ref;
     }
 
-    public function setRef(string $ref): static
+    public function setRef(string $ref): self
     {
         $this->ref = $ref;
 
@@ -87,7 +87,7 @@ class DetailCommande
         return $this->prix_unit;
     }
 
-    public function setPrixUnit(float $prix_unit): static
+    public function setPrixUnit(float $prix_unit): self
     {
         $this->prix_unit = $prix_unit;
 
@@ -99,7 +99,7 @@ class DetailCommande
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -111,7 +111,7 @@ class DetailCommande
         return $this->total;
     }
 
-    public function setTotal(float $total): static
+    public function setTotal(float $total): self
     {
         $this->total = $total;
 
@@ -123,7 +123,7 @@ class DetailCommande
         return $this->tva;
     }
 
-    public function setTva(float $tva): static
+    public function setTva(float $tva): self
     {
         $this->tva = $tva;
 
@@ -135,7 +135,7 @@ class DetailCommande
         return $this->ht;
     }
 
-    public function setHt(float $ht): static
+    public function setHt(float $ht): self
     {
         $this->ht = $ht;
 
@@ -147,7 +147,7 @@ class DetailCommande
         return $this->taux_tva;
     }
 
-    public function setTauxTva(?string $taux_tva): static
+    public function setTauxTva(?string $taux_tva): self
     {
         $this->taux_tva = $taux_tva;
 
