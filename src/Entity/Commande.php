@@ -37,13 +37,16 @@ class Commande
     #[ORM\Column]
     private ?float $ht = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: DetailCommande::class)]
+    private Collection $detailCommandes;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')] //
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->detailCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,7 +59,7 @@ class Commande
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): static
+    public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
 
@@ -68,7 +71,7 @@ class Commande
         return $this->date_commande;
     }
 
-    public function setDateCommande(\DateTimeInterface $date_commande): static
+    public function setDateCommande(\DateTimeInterface $date_commande): self
     {
         $this->date_commande = $date_commande;
 
@@ -80,7 +83,7 @@ class Commande
         return $this->total;
     }
 
-    public function setTotal(float $total): static
+    public function setTotal(float $total): self
     {
         $this->total = $total;
 
@@ -92,7 +95,7 @@ class Commande
         return $this->livraison;
     }
 
-    public function setLivraison(bool $livraison): static
+    public function setLivraison(bool $livraison): self
     {
         $this->livraison = $livraison;
 
@@ -104,7 +107,7 @@ class Commande
         return $this->tva;
     }
 
-    public function setTva(float $tva): static
+    public function setTva(float $tva): self
     {
         $this->tva = $tva;
 
@@ -116,7 +119,7 @@ class Commande
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -128,7 +131,7 @@ class Commande
         return $this->ht;
     }
 
-    public function setHt(float $ht): static
+    public function setHt(float $ht): self
     {
         $this->ht = $ht;
 
@@ -140,9 +143,39 @@ class Commande
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailCommande>
+     */
+    public function getDetailCommandes(): Collection
+    {
+        return $this->detailCommandes;
+    }
+
+    public function addDetailCommande(DetailCommande $detailCommande): self
+    {
+        if (!$this->detailCommandes->contains($detailCommande)) {
+            $this->detailCommandes->add($detailCommande);
+            $detailCommande->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailCommande(DetailCommande $detailCommande): self
+    {
+        if ($this->detailCommandes->removeElement($detailCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailCommande->getCommande() === $this) {
+                $detailCommande->setCommande(null);
+            }
+        }
 
         return $this;
     }
