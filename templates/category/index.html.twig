@@ -1,20 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Category index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{# __________Lien pour icone FA_______________ #}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/belli/IdeaProjects/Projet_Fostane/src/Controller/CategoryController.php</code></li>
-        <li>Your template at <code>C:/Users/belli/IdeaProjects/Projet_Fostane/templates/category/index.html.twig</code></li>
-    </ul>
+
+
+
+<div class="container">
+    <h1 class="text-center">Categorie</h1>
+
+
+    <table class="table">
+            <thead>
+                <tr class="row">
+                    <th class="text-center col-4">Id</th>
+                    <th class="text-center col-4">Nom</th>
+                    <th class="text-center col-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr class="row">
+                    <td class="text-center col-4">{{ category.id }}</td>
+                    <td class="text-center col-4">{{ category.name }}</td>
+                    <td class="text-center col-4">
+                        <a href="{{ path('app_category_show', {'id': category.id}) }}"><i class="fa-solid fa-eye mr-50"></i></a>
+                        <a href="{{ path('app_category_edit', {'id': category.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+
+    <a href="{{ path('app_category_new') }}"><button class="bg-dark text-white rounded-4">Créer une nouvelle catégorie</button></a>
 </div>
+
 {% endblock %}
