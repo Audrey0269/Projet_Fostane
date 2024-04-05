@@ -2,9 +2,17 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Product;
+use App\Entity\Picturs;
+use App\Form\ProductType;
+//use App\Form\PictursType;
+use App\Repository\ProductRepository;
+use App\Services\ImageManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 #[Route('/admin/product')]
 class ProductController extends AbstractController
@@ -35,7 +43,7 @@ class ProductController extends AbstractController
                 return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
             }
 
-            return $this->renderForm('product/new.html.twig', [
+            return $this->render('product/new.html.twig', [
                 'product' => $product,
                 'form' => $form,
             ]);
@@ -89,10 +97,12 @@ class ProductController extends AbstractController
                 return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
             }
 
-            return $this->renderForm('product/edit.html.twig', [
+            return $this->render('product/edit.html.twig', [
                 'product' => $product,
                 'form' => $form,
             ]);
+
+
         }
 
         #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]

@@ -2,13 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
-use App\Entity\Product;
 use App\Entity\Tva;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Product;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProductType extends AbstractType
 {
@@ -20,14 +21,19 @@ class ProductType extends AbstractType
             ->add('prix')
             ->add('quantity')
             ->add('ref')
-            ->add('image')
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-'choice_label' => 'id',
+            ->add('image' , FileType::class, [
+                'label' =>'Charger image',
+                'data_class' =>null,
+                'required' => false
             ])
-            ->add('tva', EntityType::class, [
+            ->add('category' , EntityType::class , [
+                'class'=> Category::class,
+                'choice_label'=> 'name'
+            ])
+
+            ->add('tva' , EntityType::class ,[
                 'class' => Tva::class,
-'choice_label' => 'id',
+                'choice_label' => 'name'
             ])
         ;
     }

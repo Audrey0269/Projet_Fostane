@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
+use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProduitRepository::class)]
-class Produit
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
+class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,7 +41,7 @@ class Produit
     #[ORM\JoinColumn(nullable: false)]
     private ?Tva $tva = null;
 
-    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Picturs::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Picturs::class, orphanRemoval: true)]
     private Collection $picturs;
 
     public function __construct()
@@ -138,6 +138,18 @@ class Produit
         return $this;
     }
 
+    public function getImage(): ?string
+        {
+            return $this->image;
+        }
+
+        public function setImage(?string $image): self
+        {
+            $this->image = $image;
+
+            return $this;
+        }
+
     /**
      * @return Collection<int, Picturs>
      */
@@ -150,7 +162,7 @@ class Produit
     {
         if (!$this->picturs->contains($pictur)) {
             $this->picturs->add($pictur);
-            $pictur->setProduit($this);
+            $pictur->setProduct($this);
         }
 
         return $this;
@@ -160,8 +172,8 @@ class Produit
     {
         if ($this->picturs->removeElement($pictur)) {
             // set the owning side to null (unless already changed)
-            if ($pictur->getProduit() === $this) {
-                $pictur->setProduit(null);
+            if ($pictur->getProduct() === $this) {
+                $pictur->setProduct(null);
             }
         }
 
