@@ -17,39 +17,40 @@
 
                     {% if app.user %}
 
-                      <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
 
-                    {# 
+                    {#
                     <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_panier') }}"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </li>
+                    </li> #}
                     <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_compte') }}">Mon compte</a>
-                    </li> #}
-                    
+                    </li>
 
 
 
                         {% if is_granted('ROLE_ADMIN') %}
                         
-                        {# 
+
                         <li class="nav-item">
                             <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_category_index') }}">Categorie</a>
-                        </li>
-                        <li class="nav-item">
+                         </li>
+                         {# <li class="nav-item">
                             <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_produit_index') }}">Produit</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_commande_index') }}">Commande</a>
-                        </li>
+                         {#</li>
                         <li class="nav-item">
                             <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_tva_index') }}">TVA</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_carousel_index') }}">Carousel</a>
-                        </li>#}
+                        </li>
+                        #}
+
+                        <li class="nav-item">
+                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_commande_index') }}">Commande</a>
+                        </li>
 
                         {% endif %}
                        
