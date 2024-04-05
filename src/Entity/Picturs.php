@@ -15,7 +15,7 @@ class Picturs
 
     #[ORM\ManyToOne(inversedBy: 'picturs')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Produit $produit = null;
+    private ?Product $product = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -25,14 +25,14 @@ class Picturs
         return $this->id;
     }
 
-    public function getProduit(): ?Produit
+    public function getProduct(): ?Product
     {
-        return $this->produit;
+        return $this->product;
     }
 
-    public function setProduit(?Produit $produit): static
+    public function setProduct(?Product $product): static
     {
-        $this->produit = $produit;
+        $this->product = $product;
 
         return $this;
     }
