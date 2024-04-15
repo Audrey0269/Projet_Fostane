@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
-use App\Entity\Product;
 use App\Entity\Picturs;
+use App\Entity\Product;
 use App\Form\ProductType;
-//use App\Form\PictursType;
-use App\Repository\ProductRepository;
+use App\Form\PictursType;
 use App\Services\ImageManager;
+use App\Repository\PictursRepository;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

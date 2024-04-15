@@ -18,7 +18,7 @@
             <thead>
                 <tr class="row">
                     <th class="text-center col-4">Id</th>
-                    <th class="text-center col-4">Nom</th>
+                    <th class="text-center col-4">Type</th>
                     <th class="text-center col-4">Actions</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
             {% for category in categories %}
                 <tr class="row">
                     <td class="text-center col-4">{{ category.id }}</td>
-                    <td class="text-center col-4">{{ category.name }}</td>
+                    <td class="text-center col-4">{{ category.type }}</td>
                     <td class="text-center col-4">
                         <a href="{{ path('app_category_show', {'id': category.id}) }}"><i class="fa-solid fa-eye mr-50"></i></a>
                         <a href="{{ path('app_category_edit', {'id': category.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>

@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
-use App\Repository\ProduitRepository;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Panier
 {
 
     private $session;
-    private $produitRepository;
+    private $productRepository;
 
 
-    public  function __construct(SessionInterface $sessionInterface , ProduitRepository $produitRepository)
+    public  function __construct(SessionInterface $sessionInterface , ProductRepository $productRepository)
     {
         $this -> session = $sessionInterface;
-        $this -> produitRepository = $produitRepository;
+        $this -> productRepository = $productRepository;
     }
 
 
@@ -29,7 +29,7 @@ class Panier
     }
 
 
-    public function addProduitPanier(int $id){
+    public function addProductPanier(int $id){
         $panier = $this->getPanier();
 
         if (!empty($panier[$id])){
@@ -41,7 +41,7 @@ class Panier
     }
 
 
-    public function deleteProduitPanier($id){
+    public function deleteProductPanier($id){
         $panier = $this -> getPanier();
 
         if (!empty($panier[$id])) {
@@ -51,7 +51,7 @@ class Panier
     }
 
 
-    public function deleteQuantityProduit($id){
+    public function deleteQuantityProduct($id){
         $panier = $this -> getPanier();
         
         if($panier[$id] > 1){
@@ -71,16 +71,16 @@ class Panier
         $panier = $this -> getPanier(); //on recupère le panier
         $panier_detail = [] ;
         foreach ($panier as $id => $quantity) {
-            $produit = $this -> produitRepository -> find($id);
+            $product = $this -> productRepository -> find($id);
 
-            $tva = $produit ->getTva() -> getTaux();
-            $prix_unit = $produit -> getPrix();
+            $tva = $product ->getTva() -> getTaux();
+            $prix_unit = $product -> getPrix();
             $totalTtc = $prix_unit * $quantity;
             $totalHt = $totalTtc / (1 + $tva);
             $totalTva = $totalTtc - $totalHt;
 
             $panier_detail [] = [
-                'produit' => $produit,
+                'product' => $product,
                 'quantity' => $quantity,
                 'total' => $totalTtc,
                 'totalHt' => $totalHt,

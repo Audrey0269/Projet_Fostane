@@ -4,9 +4,29 @@
 
 {% block body %}
 
-<div class="container">
-    <h1>Page Home</h1>
+<div>
 
-    <h2>LIGNE 100product controller = revoir render / renderForm=renderform marhe pas donc juste rendtre</h2>
+<div class="container">
+<h1 class="text-center my-4">Liste des products</h1>
+
+    <div class="row">
+        {% for product in products %}
+            <div class="col-3">
+
+            {#__________Début card Bootstrap___________#}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset('images/' ~ product.image) }}" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|slice(0, 90) }}...</p>
+                        <p><span class="fw-semibold">{{ product.prix }} € </span></p>
+                        <a href="{{ path('app_user_product_show',{'id' : product.id }) }}" class="btn btn-primary">Voir detail</a>
+                    </div>
+                </div>
+            {#___________Fin card Bootstrap_____________#}
+            </div>
+{% endfor %}
+    </div>
 </div>
+
 {% endblock %}

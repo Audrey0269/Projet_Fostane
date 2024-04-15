@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -15,14 +16,14 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column]
@@ -31,18 +32,17 @@ class Product
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $ref = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Tva $tva = null;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Picturs::class, orphanRemoval: true)]
     private Collection $picturs;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Tva $tva = null;
 
     public function __construct()
     {
@@ -59,7 +59,7 @@ class Product
         return $this->category;
     }
 
-    public function setCategory(?Category $category): static
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
@@ -71,7 +71,7 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -83,7 +83,7 @@ class Product
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -95,7 +95,7 @@ class Product
         return $this->prix;
     }
 
-    public function setPrix(float $prix): static
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
 
@@ -107,7 +107,7 @@ class Product
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -119,46 +119,34 @@ class Product
         return $this->ref;
     }
 
-    public function setRef(string $ref): static
+    public function setRef(string $ref): self
     {
         $this->ref = $ref;
 
         return $this;
     }
 
-    public function getTva(): ?Tva
+    public function getImage(): ?string
     {
-        return $this->tva;
+        return $this->image;
     }
 
-    public function setTva(?Tva $tva): static
+    public function setImage(?string $image): self
     {
-        $this->tva = $tva;
+        $this->image = $image;
 
         return $this;
     }
 
-    public function getImage(): ?string
-        {
-            return $this->image;
-        }
-
-        public function setImage(?string $image): self
-        {
-            $this->image = $image;
-
-            return $this;
-        }
-
     /**
-     * @return Collection<int, Picturs>
-     */
+    * @return Collection<int, Picturs>
+    */
     public function getPicturs(): Collection
     {
         return $this->picturs;
     }
 
-    public function addPictur(Picturs $pictur): static
+    public function addPictur(Picturs $pictur): self
     {
         if (!$this->picturs->contains($pictur)) {
             $this->picturs->add($pictur);
@@ -168,7 +156,7 @@ class Product
         return $this;
     }
 
-    public function removePictur(Picturs $pictur): static
+    public function removePictur(Picturs $pictur): self
     {
         if ($this->picturs->removeElement($pictur)) {
             // set the owning side to null (unless already changed)
@@ -179,4 +167,18 @@ class Product
 
         return $this;
     }
+
+    public function getTva(): ?Tva
+    {
+        return $this->tva;
+    }
+
+    public function setTva(?Tva $tva): self
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+
 }

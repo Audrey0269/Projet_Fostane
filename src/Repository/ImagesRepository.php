@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Images;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry; 
 
 /**
  * @extends ServiceEntityRepository<Images>
@@ -14,12 +14,12 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Images[]    findAll()
  * @method Images[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ImagesRepository extends ServiceEntityRepository
-{
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Images::class);
-    }
+// class ImagesRepository extends ServiceEntityRepository
+// {
+//     public function __construct(ManagerRegistry $registry)
+//     {
+//         parent::__construct($registry, Images::class);
+//     }
 
 //    /**
 //     * @return Images[] Returns an array of Images objects
@@ -45,4 +45,4 @@ class ImagesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+//}

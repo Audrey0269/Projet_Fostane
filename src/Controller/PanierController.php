@@ -21,10 +21,10 @@ class PanierController extends AbstractController
         ]);
     }
 
-    #[Route('/ajouter-panier/{id}', name: 'app_panier_add_produit')]
+    #[Route('/ajouter-panier/{id}', name: 'app_panier_add_product')]
     public function add($id , Panier $panier): Response
     {
-        $panier -> addProduitPanier($id);
+        $panier -> addProductPanier($id);
         return $this -> redirectToRoute('app_panier');
     }
 
@@ -32,15 +32,15 @@ class PanierController extends AbstractController
     #[Route('/delete-quantite-panier/{id}', name: 'app_panier_delete_quantity')]
     public function deleteQuantity($id , Panier $panier): Response
     {
-        $panier -> deleteQuantityProduit($id);
+        $panier -> deleteQuantityProduct($id);
         return $this -> redirectToRoute('app_panier');
     }
 
 
-    #[Route('/delete-produit-panier/{id}', name: 'app_panier_delete_produit')]
-    public function deleteProduit($id , Panier $panier): Response
+    #[Route('/delete-product-panier/{id}', name: 'app_panier_delete_product')]
+    public function deleteProduct($id , Panier $panier): Response
     {
-        $panier -> deleteProduitPanier($id);
+        $panier -> deleteProductPanier($id);
         return $this -> redirectToRoute('app_panier');
     }
 }

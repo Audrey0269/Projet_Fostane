@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th class="text-center text-uppercase">Image</th>
-                <th class="text-center text-uppercase">Produit</th>
+                <th class="text-center text-uppercase">Product</th>
                 <th class="text-center text-uppercase">Prix</th>
                 <th class="text-center text-uppercase">Quantité</th>
                 <th class="text-center text-uppercase">Total</th>
@@ -29,20 +29,20 @@
         {% for row in panier %}
             <tr> 
                 {# Ici on fait appel au panier service #}
-                <td class="text-center"> <img src="{{ asset('images/' ~ row['produit'].image) }}" style="width : 50px" alt="ImageProduit"></td>
-                <td class="text-center">{{ row['produit'].name }}</td>
-                <td class="text-center">{{ row['produit'].prix }}</td>
+                <td class="text-center"> <img src="{{ asset('images/' ~ row['product'].image) }}" style="width : 50px" alt="ImageProduct"></td>
+                <td class="text-center">{{ row['product'].name }}</td>
+                <td class="text-center">{{ row['product'].prix }}</td>
                 <td class="text-center">
-                    <a href="{{ path('app_panier_delete_quantity' , { 'id' : row['produit'].id } ) }}"><i class="fa-solid fa-minus"></i></i></a>
+                    <a href="{{ path('app_panier_delete_quantity' , { 'id' : row['product'].id } ) }}"><i class="fa-solid fa-minus"></i></i></a>
                     {{ row['quantity'] }}
-                    <a href="{{ path('app_panier_add_produit' , { 'id' : row['produit'].id } ) }}"><i class="fa-solid fa-plus"></i></a>
+                    <a href="{{ path('app_panier_add_product' , { 'id' : row['product'].id } ) }}"><i class="fa-solid fa-plus"></i></a>
                 </td>
                 <td class="text-center">{{ row['total'] |number_format(2) }} € </td>
                 <td class="text-center">{{ row['totalHt'] |number_format(2) }} € </td>
                 <td class="text-center">{{ row['totalTva'] |number_format(2) }} € </td>
 
                 <td class="text-center">
-                    <a href="{{ path('app_panier_delete_produit' , { 'id' : row['produit'].id } ) }}"><i class="fa-solid fa-trash"></i></a>
+                    <a href="{{ path('app_panier_delete_product' , { 'id' : row['product'].id } ) }}"><i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
         {% endfor %}
