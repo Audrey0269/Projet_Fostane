@@ -7,11 +7,9 @@ use App\Entity\Commande;
 use App\Services\Panier;
 use App\Entity\DetailCommande;
 
-//use Symfony\Component\Security\Http\Security;
-use Symfony\Component\Security\Core\Security;
-//use Symfony\Component\Security\Bundle\Security;
 
-//use Symfony\Component\Security\Core\AuthenticationEvents;
+//use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 
 
 
@@ -19,10 +17,10 @@ class CommandeManager
 {
     private $security;
 
-    // public function __construct(Security $security)
-    // {
-    //     $this -> security = $security;
-    // }
+    public function __construct(Security $security)
+    {
+        $this -> security = $security;
+    }
 
 
     /**

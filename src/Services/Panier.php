@@ -3,19 +3,25 @@
 namespace App\Services;
 
 use App\Repository\ProductRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+//use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class Panier
 {
 
-    private $session;
+    private $requestStack;
     private $productRepository;
 
 
-    public  function __construct(SessionInterface $sessionInterface , ProductRepository $productRepository)
+    public  function __construct(RequestStack $requestStack , ProductRepository $productRepository)
     {
-        $this -> session = $sessionInterface;
+        $this -> requestStack = $requestStack;
         $this -> productRepository = $productRepository;
+    }
+
+    private function getSession()
+    {
+        return $this->requestStack->getSession();
     }
 
 
@@ -25,7 +31,7 @@ class Panier
      * @return array
      */
     public function getPanier(){
-        return $this -> session -> get('panier' , []) ;
+        return $this -> getSession() -> get('panier' , []) ;
     }
 
 
@@ -37,7 +43,7 @@ class Panier
         }else{
             $panier [$id] = 1;
         }
-        $this -> session -> set('panier' , $panier);
+        $this -> getSession() -> set('panier' , $panier);
     }
 
 
@@ -47,7 +53,7 @@ class Panier
         if (!empty($panier[$id])) {
             unset($panier[$id]);
         }
-        $this -> session -> set('panier' , $panier);
+        $this -> getSession() -> set('panier' , $panier);
     }
 
 
@@ -59,11 +65,11 @@ class Panier
         }else{
             unset($panier[$id]);
         }
-        $this -> session -> set('panier' , $panier);
+        $this -> getSession() -> set('panier' , $panier);
     }
 
     public function deletePanier(){
-        $this -> session -> remove('panier');
+        $this -> getSession() -> remove('panier');
     }
 
 
