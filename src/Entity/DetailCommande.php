@@ -38,8 +38,8 @@ class DetailCommande
     #[ORM\Column]
     private ?float $ht = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $taux_tva = null;
+    #[ORM\Column(length: 255)]
+    private ?string $tauxTva = null;
 
     public function getId(): ?int
     {
@@ -144,12 +144,12 @@ class DetailCommande
 
     public function getTauxTva(): ?string
     {
-        return $this->taux_tva;
+        return $this->tauxTva;
     }
 
-    public function setTauxTva(?string $taux_tva): self
+    public function setTauxTva(?string $tauxTva): self
     {
-        $this->taux_tva = $taux_tva;
+        $this->tauxTva = $tauxTva;
 
         return $this;
     }

@@ -20,7 +20,24 @@ class PictursRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Picturs::class);
     }
+    
+    public function save(Picturs $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
 
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Picturs $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 //    /**
 //     * @return Picturs[] Returns an array of Picturs objects
 //     */

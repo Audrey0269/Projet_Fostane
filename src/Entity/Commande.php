@@ -16,6 +16,13 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')] 
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
 
@@ -28,21 +35,14 @@ class Commande
     #[ORM\Column]
     private ?bool $livraison = null;
 
-    #[ORM\Column]
-    private ?float $tva = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column]
-    private ?float $ht = null;
-
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: DetailCommande::class)]
     private Collection $detailCommandes;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')] //
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    #[ORM\Column]
+    private ?float $tva = null;
+
+    #[ORM\Column]
+    private ?float $ht = null;
 
     public function __construct()
     {
@@ -52,6 +52,30 @@ class Commande
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getAdresse(): ?string
@@ -102,55 +126,7 @@ class Commande
         return $this;
     }
 
-    public function getTva(): ?float
-    {
-        return $this->tva;
-    }
-
-    public function setTva(float $tva): self
-    {
-        $this->tva = $tva;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getHt(): ?float
-    {
-        return $this->ht;
-    }
-
-    public function setHt(float $ht): self
-    {
-        $this->ht = $ht;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
+/**
      * @return Collection<int, DetailCommande>
      */
     public function getDetailCommandes(): Collection
@@ -179,4 +155,31 @@ class Commande
 
         return $this;
     }
+
+    public function getTva(): ?float
+    {
+        return $this->tva;
+    }
+
+    public function setTva(float $tva): self
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    public function getHt(): ?float
+    {
+        return $this->ht;
+    }
+
+    public function setHt(float $ht): self
+    {
+        $this->ht = $ht;
+
+        return $this;
+    }
+
+
+    
 }

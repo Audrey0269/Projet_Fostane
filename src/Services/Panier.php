@@ -2,20 +2,26 @@
 
 namespace App\Services;
 
-use App\Repository\ProduitRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ProductRepository;
+//use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class Panier
 {
 
-    private $session;
-    private $produitRepository;
+    private $requestStack;
+    private $productRepository;
 
 
-    public  function __construct(SessionInterface $sessionInterface , ProduitRepository $produitRepository)
+    public  function __construct(RequestStack $requestStack , ProductRepository $productRepository)
     {
-        $this -> session = $sessionInterface;
-        $this -> produitRepository = $produitRepository;
+        $this -> requestStack = $requestStack;
+        $this -> productRepository = $productRepository;
+    }
+
+    private function getSession()
+    {
+        return $this->requestStack->getSession();
     }
 
 
@@ -25,11 +31,11 @@ class Panier
      * @return array
      */
     public function getPanier(){
-        return $this -> session -> get('panier' , []) ;
+        return $this -> getSession() -> get('panier' , []) ;
     }
 
 
-    public function addProduitPanier(int $id){
+    public function addProductPanier(int $id){
         $panier = $this->getPanier();
 
         if (!empty($panier[$id])){
@@ -37,21 +43,21 @@ class Panier
         }else{
             $panier [$id] = 1;
         }
-        $this -> session -> set('panier' , $panier);
+        $this -> getSession() -> set('panier' , $panier);
     }
 
 
-    public function deleteProduitPanier($id){
+    public function deleteProductPanier($id){
         $panier = $this -> getPanier();
 
         if (!empty($panier[$id])) {
             unset($panier[$id]);
         }
-        $this -> session -> set('panier' , $panier);
+        $this -> getSession() -> set('panier' , $panier);
     }
 
 
-    public function deleteQuantityProduit($id){
+    public function deleteQuantityProduct($id){
         $panier = $this -> getPanier();
         
         if($panier[$id] > 1){
@@ -59,11 +65,11 @@ class Panier
         }else{
             unset($panier[$id]);
         }
-        $this -> session -> set('panier' , $panier);
+        $this -> getSession() -> set('panier' , $panier);
     }
 
     public function deletePanier(){
-        $this -> session -> remove('panier');
+        $this -> getSession() -> remove('panier');
     }
 
 
@@ -71,16 +77,16 @@ class Panier
         $panier = $this -> getPanier(); //on recupère le panier
         $panier_detail = [] ;
         foreach ($panier as $id => $quantity) {
-            $produit = $this -> produitRepository -> find($id);
+            $product = $this -> productRepository -> find($id);
 
-            $tva = $produit ->getTva() -> getTaux();
-            $prix_unit = $produit -> getPrix();
+            $tva = $product ->getTva() -> getTaux();
+            $prix_unit = $product -> getPrix();
             $totalTtc = $prix_unit * $quantity;
             $totalHt = $totalTtc / (1 + $tva);
             $totalTva = $totalTtc - $totalHt;
 
             $panier_detail [] = [
-                'produit' => $produit,
+                'product' => $product,
                 'quantity' => $quantity,
                 'total' => $totalTtc,
                 'totalHt' => $totalHt,
