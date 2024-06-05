@@ -38,7 +38,7 @@
                     <tr>
                         <th>N°commande</th>
                         <th>Date commande</th>
-                        <th>Detail</th>
+                        {#<th>Detail</th>#}
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -46,6 +46,7 @@
                     <tr>
                         {% for item in app.user.commandes %}
                             {% if item.livraison == false %}
+                            <tr>
                                 <td>{{ item.id }}</td>
                                 <td>{{ item.dateCommande | date('Y/m/d') }}</td> 
                                 {# <td>Detail</td>
@@ -54,6 +55,7 @@
                                     {% endfor %}
                                 </td> #}
                                 <td>{{ item.total | number_format(2) }} € </td>
+                            </tr>    
                             {% endif %}
                         {% endfor %}
                     </tr>
@@ -71,22 +73,25 @@
                     <th>N°commande</th>
                     <th>Date commande</th>
                     <th>Total</th>
-                    <th>Detail</th>
+                    {#<th>Detail</th>#}
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     {% for item in app.user.commandes %}
                         {% if item.livraison == true %}
+                        <tr>
                             <td>{{ item.id }}</td>
                             <td>{{ item.dateCommande | date('Y/m/d') }}</td>
                             <td>{{ item.total }}</td>
                             {# <td>{{ item.detailCommande }}</td> #}
+                        </tr> 
                         {% endif %}
                     {% endfor %} 
                 </tr>
             </tbody>
         </table>
+        
         </div>
     </div>
 </div>

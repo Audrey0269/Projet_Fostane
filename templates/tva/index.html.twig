@@ -1,28 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tva index{% endblock %}
+{% block title %}Fostane{% endblock %}
 
 {% block body %}
-    <h1>Tva index</h1>
+
+<div class="container">
+    <h1 class="text-center">Tva</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Taux</th>
-                <th>actions</th>
+                <th class="text-center col-3">Id</th>
+                <th class="text-center col-3">Name</th>
+                <th class="text-center col-3">Taux</th>
+                <th class="text-center col-3">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for tva in tvas %}
             <tr>
-                <td>{{ tva.id }}</td>
-                <td>{{ tva.name }}</td>
-                <td>{{ tva.taux }}</td>
-                <td>
-                    <a href="{{ path('app_tva_show', {'id': tva.id}) }}">show</a>
-                    <a href="{{ path('app_tva_edit', {'id': tva.id}) }}">edit</a>
+                <td class="text-center col-3">{{ tva.id }}</td>
+                <td class="text-center col-3">{{ tva.name }}</td>
+                <td class="text-center col-3"> {{ tva.taux }}</td>
+                <td class="text-center col-3">
+                    <a href="{{ path('app_tva_show', {'id': tva.id}) }}">Voir</a>
+                    <a href="{{ path('app_tva_edit', {'id': tva.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +35,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_tva_new') }}">Create new</a>
+    <a href="{{ path('app_tva_new') }}"><button class="bg-dark text-white rounded-4">Créer une nouvelle tva</button></a>
+</div>
 {% endblock %}
+
