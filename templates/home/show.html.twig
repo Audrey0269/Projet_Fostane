@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Phone
+{% block title %}Produit
 
 {% endblock %}
 
@@ -16,7 +16,7 @@
                     <img src="{{ asset('images/' ~ product.image) }}" class="border p-3">
 
 
-                    {% for pictur in product.picturs %}
+                    {% for pictur in product.image %}
                         <img class="miniatureShow border p-2 h-20 w-50" src="{{ asset('images/' ~ pictur.name ) }}" alt="images">
                     {% endfor %}
 

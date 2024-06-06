@@ -15,10 +15,10 @@
 
             {#__________Début card Bootstrap___________#}
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ asset('images/' ~ product.image) }}" alt="...">
+                    <img src="{{ asset('images/' ~ product.image) }}" alt="">
                     <div class="card-body">
                         <h5 class="card-title text-center">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description|slice(0, 30) }}...</p>
+                        <p class="card-text">{{ product.description|slice(0, 90) }}</p>
                         <p><span class="fw-semibold">{{ product.prix }} € </span></p>
                         <a href="{{ path('app_user_product_show',{'id' : product.id }) }}" class="btn btn-primary">Voir detail</a>
                     </div>

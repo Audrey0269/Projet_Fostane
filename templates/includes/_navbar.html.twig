@@ -15,14 +15,13 @@
                     </li>
 
 
-
                     {% if app.user %}
 
                     <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_panier') }}"><i class="fa-solid fa-basket-shopping"></i></a>
+                        <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_panier') }}">Panier</a>
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_compte') }}">Mon compte</a>
@@ -34,16 +33,16 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_category_index') }}">Categorie</a>
+                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_category_index') }}">Categories</a>
                          </li>
                           <li class="nav-item">
-                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_product_index') }}">Produit</a>
+                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_product_index') }}">Produits</a>
                          </li>
                         <li class="nav-item">
                             <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_tva_index') }}">TVA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_commande_index') }}">Commande</a>
+                            <a class="nav-link text-black fw-bolder text-uppercase" href="{{ path('app_commande_index') }}">Commandes</a>
                         </li>
 
                         {% endif %}
@@ -58,8 +57,9 @@
                         </li>
                         {% endif %}
 
-                        <img src="public/images/logo.jpg" alt="logo" height="40" width="40"/>
-                    
+                         <a class="navbar-brand ms-auto" href="{{ path('app_home') }}">
+                            <img src="{{ asset('images/logo.jpg') }}" alt="logo" height="40" width="40"/>
+                         </a>
 
                 </ul>
             </div>
